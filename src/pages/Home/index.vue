@@ -21,13 +21,10 @@ import {
   Floor,
   Brand,
 } from "@/components";
-import { reqCategoryList } from "@/api";
+
 export default {
   name: "",
   components: { ListContainer, Recommend, Rank, Like, Floor, Brand },
-  created() {
-    reqCategoryList();
-  },
 };
 </script>
 

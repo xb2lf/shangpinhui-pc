@@ -7,5 +7,5 @@ export {
   Home,
   Login,
   Register,
-  Search
+  Search,
 }

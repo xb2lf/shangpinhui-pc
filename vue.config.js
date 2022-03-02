@@ -1,5 +1,6 @@
 module.exports = {
-  // 关闭eslint
+  productionSourceMap: false,
+  // 关闭ESLINT校验工具
   lintOnSave: false,
   // 代理跨域
   devServer: {

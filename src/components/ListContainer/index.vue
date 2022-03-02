@@ -4,28 +4,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img :src="Banner1" />
-            </div>
-            <!-- <div class="swiper-slide">
-              <img :src="Banner2" />
-            </div>
-            <div class="swiper-slide">
-              <img :src="Banner3" />
-            </div>
-            <div class="swiper-slide">
-              <img :src="Banner4" />
-            </div> -->
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <Carousel :carouselList="bannerList"></Carousel>
       </div>
       <div class="right">
         <div class="news">
@@ -101,21 +80,24 @@
 </template>
 
 <script>
-import Banner1 from "@/assets/images/home/banner1.jpg";
-import Banner2 from "@/assets/images/home/banner2.jpg";
-import Banner3 from "@/assets/images/home/banner3.jpg";
-import Banner4 from "@/assets/images/home/banner4.jpg";
+import { mapState } from "vuex";
 import Ad1 from "@/assets/images/home/ad1.png";
 export default {
   name: "",
   data() {
     return {
-      Banner1,
-      Banner2,
-      Banner3,
-      Banner4,
       Ad1,
     };
+  },
+  methods: {},
+  mounted() {
+    //派发action，通知Vuex发起ajax请求，将数据存储在仓库中
+    this.$store.dispatch("getBannerList");
+  },
+  computed: {
+    ...mapState({
+      bannerList: (state) => state.home.bannerList,
+    }),
   },
 };
 </script>

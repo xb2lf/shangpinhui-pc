@@ -2,7 +2,68 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container">
-      <h2 class="all">全部商品分类</h2>
+      <!-- 事件委派|事件委托 -->
+      <div @mouseleave="handleLeaveIndex" @mouseenter="handleEnterShow">
+        <h2 class="all">全部商品分类</h2>
+        <!-- 过渡动画 -->
+        <transition name="sort">
+          <div class="sort" v-show="show">
+            <div class="all-sort-list2" @click="handleGoSearch">
+              <div
+                class="item"
+                :class="{ cur: currentIndex === index }"
+                v-for="(c1, index) in categoryList"
+                :key="c1.categoryId"
+                @mouseenter="handleChangeIndex(index)"
+              >
+                <h3>
+                  <a
+                    href="javascript:void(0)"
+                    :data-categoryName="c1.categoryName"
+                    :data-category1Id="c1.categoryId"
+                    >{{ c1.categoryName }}</a
+                  >
+                </h3>
+                <div
+                  class="item-list clearfix"
+                  :style="{
+                    display: currentIndex === index ? 'block' : 'none',
+                  }"
+                >
+                  <div
+                    class="subitem"
+                    v-for="(c2, index) in c1.categoryChild"
+                    :key="c2.categoryId"
+                  >
+                    <dl class="fore">
+                      <dt>
+                        <a
+                          href="javascript:void(0)"
+                          :data-categoryName="c2.categoryName"
+                          :data-category2Id="c2.categoryId"
+                          >{{ c2.categoryName }}</a
+                        >
+                      </dt>
+                      <dd>
+                        <em>
+                          <a
+                            href="javascript:void(0)"
+                            :data-categoryName="c3.categoryName"
+                            :data-category3Id="c3.categoryId"
+                            v-for="(c3, index) in c2.categoryChild"
+                            :key="c3.categoryId"
+                            >{{ c3.categoryName }}</a
+                          >
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -13,53 +74,66 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
-        <div class="all-sort-list2">
-          <div
-            class="item"
-            v-for="(c1, index) in categoryList"
-            :key="c1.categoryId"
-          >
-            <h3>
-              <a href="">{{ c1.categoryName }}</a>
-            </h3>
-            <div class="item-list clearfix">
-              <div
-                class="subitem"
-                v-for="(c2, index) in c1.categoryChild"
-                :key="c2.categoryId"
-              >
-                <dl class="fore">
-                  <dt>
-                    <a href="">{{ c2.categoryName }}</a>
-                  </dt>
-                  <dd>
-                    <em>
-                      <a
-                        href=""
-                        v-for="(c3, index) in c2.categoryChild"
-                        :key="c3.categoryId"
-                        >{{ c3.categoryName }}</a
-                      >
-                    </em>
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import throttle from "lodash/throttle";
 export default {
   name: "TypeNav",
+  data() {
+    return {
+      //存储用户鼠标移上哪一个一级分类
+      currentIndex: -1,
+      show: true,
+    };
+  },
+  methods: {
+    //获取鼠标进入修改响应式数据currentIndex属性(加节流)
+    handleChangeIndex: throttle(function (index) {
+      this.currentIndex = index;
+    }, 50),
+    //一级分类鼠标移出的事件回调
+    handleLeaveIndex() {
+      this.currentIndex = -1;
+      if (this.$route.path !== "/home") {
+        this.show = false;
+      }
+    },
+    handleGoSearch(event) {
+      let element = event.target;
+      let { categoryname, category1id, category2id, category3id } =
+        element.dataset;
+      if (categoryname) {
+        let loca = { name: "search" };
+        let query = { categoryName: categoryname };
+        if (category1id) {
+          query.category1Id = category1id;
+        } else if (category2id) {
+          query.category2Id = category2id;
+        } else {
+          query.category3Id = category3id;
+        }
+        if (this.$route.params) {
+          loca.params = this.$route.params;
+          loca.query = query;
+          this.$router.push(loca);
+        }
+      }
+    },
+    handleEnterShow() {
+      if (this.$route.path !== "/home") {
+        this.show = true;
+      }
+    },
+  },
   mounted() {
-    // 通知vuex发请求，获取数据，存储于仓库当中
-    this.$store.dispatch("categoryList");
+    //当组件挂载完毕，让show属性并更为false，只在Search组件下
+    if (this.$route.path !== "/home") {
+      this.show = false;
+    }
   },
   computed: {
     ...mapState({
@@ -178,14 +252,24 @@ export default {
               }
             }
           }
-
-          &:hover {
-            .item-list {
-              display: block;
-            }
-          }
+        }
+        .cur {
+          background-color: skyblue;
         }
       }
+    }
+    //=> 过渡动画样式
+    // 过渡动画开始阶段(进入)
+    .sort-enter {
+      height: 0;
+    }
+    // 过渡动画结束状态(进入)
+    .sort-enter-to {
+      height: 461px;
+    }
+    // 定义动画事件、速率
+    .sort-enter-active {
+      transition: all 0.5s linear;
     }
   }
 }

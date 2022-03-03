@@ -32,7 +32,7 @@
                 >
                   <div
                     class="subitem"
-                    v-for="(c2, index) in c1.categoryChild"
+                    v-for="c2 in c1.categoryChild"
                     :key="c2.categoryId"
                   >
                     <dl class="fore">
@@ -50,7 +50,7 @@
                             href="javascript:void(0)"
                             :data-categoryName="c3.categoryName"
                             :data-category3Id="c3.categoryId"
-                            v-for="(c3, index) in c2.categoryChild"
+                            v-for="c3 in c2.categoryChild"
                             :key="c3.categoryId"
                             >{{ c3.categoryName }}</a
                           >

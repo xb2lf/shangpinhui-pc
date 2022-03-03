@@ -6,10 +6,19 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="!userInfo.name">
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link class="register" to="/register">免费注册</router-link>
+          </p>
+          <p v-else>
+            <a>{{ userInfo.name }}</a>
+            <a
+              class="register"
+              style="cursor: pointer"
+              @click="handleUserLogout"
+              >退出登录</a
+            >
           </p>
         </div>
         <div class="typeList">
@@ -53,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Logo from "@/assets/images/logo.png";
 export default {
   name: "",
@@ -77,12 +87,25 @@ export default {
         this.$router.push(local);
       }
     },
+    async handleUserLogout() {
+      try {
+        await this.$store.dispatch("userLogout");
+        this.$router.push("/home");
+      } catch (error) {
+        alert(error.message);
+      }
+    },
   },
   mounted() {
     //通过全局事件总线清除关键字
     this.$bus.$on("clear", () => {
       this.keyword = "";
     });
+  },
+  computed: {
+    ...mapState({
+      userInfo: (state) => state.user.userInfo,
+    }),
   },
 };
 </script>

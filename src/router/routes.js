@@ -1,4 +1,23 @@
-import { Home, Search, Register, Login, Detail, AddCartSuccess, ShopCart, Trade, Pay, PaySuccess, Center, MyOrder, GroupOrder } from '@/views';
+const Home = () => import('@/views/Home');
+const Search = () => import('@/views/Search');
+const Register = () => import('@/views/Register');
+const Login = () => import('@/views/Login');
+const Detail = () => import('@/views/Detail');
+const AddCartSuccess = () => import('@/views/AddCartSuccess');
+const ShopCart = () => import('@/views/ShopCart');
+const Trade = () => import('@/views/Trade');
+const Pay = () => import('@/views/Pay');
+const PaySuccess = () => import('@/views/PaySuccess');
+const Center = () => import('@/views/Center');
+const MyOrder = () => import('@/views/MyOrder');
+const GroupOrder = () => import('@/views/GroupOrder');
+
+/* 
+ * 路由懒加载
+ *  当打包构建应用时，JavaScript 包会变得非常大，影响页面加载。如果我们能把不同路由对应 *  的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就会更加高效。
+ */
+
+
 
 const routes = [
   {
@@ -57,21 +76,36 @@ const routes = [
     component: Trade,
     meta: {
       show: true,
-    }
+    },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      // 交易页面只能从购物车跳转
+      from.path === '/shopcart' ? next() : next(false);
+    },
   },
   {
     path: '/pay',
     component: Pay,
     meta: {
       show: true,
-    }
+    },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      // 交易页面只能从购物车跳转
+      from.path === '/trade' ? next() : next(false);
+    },
   },
   {
     path: '/paysuccess',
     component: PaySuccess,
     meta: {
       show: true,
-    }
+    },
+    // 路由独享守卫
+    /* beforeEnter: (to, from, next) => {
+      // 支付成功页面只能从支付跳转
+      from.path === '/pay' ? next() : next(false);
+    }, */
   },
   {
     path: '/center',

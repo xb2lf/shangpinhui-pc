@@ -72,7 +72,7 @@
           </li>
         </ul>
         <div class="ads">
-          <img :src="Ad1" />
+          <img v-lazy="Ad1" />
         </div>
       </div>
     </div>

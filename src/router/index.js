@@ -48,7 +48,7 @@ router.beforeEach(async (to, from, next) => {
    * next 放行函数
    * next() 全部放行
    * next('/home') 放行到指定路由
-   * next(false) 
+   * next(false) 中断当前的导航
    * next(error)
    */
   let token = store.state.user.token;
@@ -72,8 +72,16 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
-    // 用户未登录
-    next();
+    // 用户未登录：不能跳转交易相关、支付相关、个人中心
+    const toPath = to.path;
+    const pathArr = ['/trade', '/pay', '/pay/success', '/center', '/center/myorder', '/center/grouporder'];
+    pathArr.includes(toPath) ? next(`/login?redirect=${toPath}`) : next();
+    /* if (toPath.includes('/trade') || toPath.includes('/pay') || toPath.includes('/pay')) {
+      next(`/login?redirect=${toPath}`)
+    } else {
+      next();
+    } */
+
   }
 });
 

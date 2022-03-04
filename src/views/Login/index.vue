@@ -21,7 +21,14 @@
                   type="text"
                   placeholder="邮箱/用户名/手机号"
                   v-model="phone"
+                  name="phone"
+                  v-validate="{
+                    required: true,
+                    regex: /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
+                  }"
+                  :class="{ invalid: errors.has('phone') }"
                 />
+                <span class="error-msg">{{ errors.first("phone") }}</span>
               </div>
               <div class="input-text clearFix">
                 <span class="pwd"></span>
@@ -29,7 +36,14 @@
                   type="password"
                   placeholder="请输入密码"
                   v-model="password"
+                  name="password"
+                  v-validate="{
+                    required: true,
+                    regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/,
+                  }"
+                  :class="{ invalid: errors.has('password') }"
                 />
+                <span class="error-msg">{{ errors.first("password") }}</span>
               </div>
               <div class="setting clearFix">
                 <label class="checkbox inline">
@@ -88,11 +102,15 @@ export default {
   methods: {
     async handleUserLogin() {
       try {
+        const success = await this.$validator.validateAll(); //全部表单验证
         const { phone, password } = this;
-        phone &&
-          password &&
-          (await this.$store.dispatch("userLogin", { phone, password }));
-        this.$router.push("/home");
+        const toPath = this.$route.query.redirect
+          ? this.$route.query.redirect
+          : "/home";
+        if (success) {
+          await this.$store.dispatch("userLogin", { phone, password });
+          this.$router.push(toPath);
+        }
       } catch (error) {
         alert(error.message);
       }

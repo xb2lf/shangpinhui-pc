@@ -29,7 +29,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img :src="phoneImg" />
+                <img v-lazy="phoneImg" />
               </a>
             </p>
             <div class="tab-info">
@@ -45,7 +45,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img :src="phoneImg" />
+                <img v-lazy="phoneImg" />
               </a>
             </p>
             <div class="tab-info">
@@ -61,7 +61,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img :src="phoneImg" />
+                <img v-lazy="phoneImg" />
               </a>
             </p>
             <div class="tab-info">
@@ -77,7 +77,7 @@
           <div class="img-item">
             <p class="tab-pic">
               <a href="#">
-                <img :src="phoneImg" />
+                <img v-lazy="phoneImg" />
               </a>
             </p>
             <div class="tab-info">

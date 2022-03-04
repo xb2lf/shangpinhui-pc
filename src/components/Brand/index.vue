@@ -4,34 +4,34 @@
     <div class="py-container">
       <ul class="brand-list">
         <li class="brand-item">
-          <img :src="brand21" />
+          <img v-lazy="brand21" />
         </li>
         <li class="brand-item">
-          <img :src="brand03" />
+          <img v-lazy="brand03" />
         </li>
         <li class="brand-item">
-          <img :src="brand05" />
+          <img v-lazy="brand05" />
         </li>
         <li class="brand-item">
-          <img :src="brand07" />
+          <img v-lazy="brand07" />
         </li>
         <li class="brand-item">
-          <img :src="brand09" />
+          <img v-lazy="brand09" />
         </li>
         <li class="brand-item">
-          <img :src="brand11" />
+          <img v-lazy="brand11" />
         </li>
         <li class="brand-item">
-          <img :src="brand13" />
+          <img v-lazy="brand13" />
         </li>
         <li class="brand-item">
-          <img :src="brand15" />
+          <img v-lazy="brand15" />
         </li>
         <li class="brand-item">
-          <img :src="brand17" />
+          <img v-lazy="brand17" />
         </li>
         <li class="brand-item">
-          <img :src="brand19" />
+          <img v-lazy="brand19" />
         </li>
       </ul>
     </div>

@@ -9,42 +9,42 @@
       <div class="bd">
         <ul class="favourate">
           <li>
-            <img :src="like02" alt="" />
+            <img v-lazy="like02" alt="" />
             <div class="like-text">
               <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
               <h3>¥116.00</h3>
             </div>
           </li>
           <li>
-            <img :src="like03" alt="" />
+            <img v-lazy="like03" alt="" />
             <div class="like-text">
               <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
               <h3>¥116.00</h3>
             </div>
           </li>
           <li>
-            <img :src="like01" alt="" />
+            <img v-lazy="like01" alt="" />
             <div class="like-text">
               <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
               <h3>¥116.00</h3>
             </div>
           </li>
           <li>
-            <img :src="like02" alt="" />
+            <img v-lazy="like02" alt="" />
             <div class="like-text">
               <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
               <h3>¥116.00</h3>
             </div>
           </li>
           <li>
-            <img :src="like03" alt="" />
+            <img v-lazy="like03" alt="" />
             <div class="like-text">
               <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
               <h3>¥116.00</h3>
             </div>
           </li>
           <li>
-            <img :src="like01" alt="" />
+            <img v-lazy="like01" alt="" />
             <div class="like-text">
               <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
               <h3>¥116.00</h3>

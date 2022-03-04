@@ -29,7 +29,8 @@
               <th colspan="5">
                 <span class="ordertitle"
                   >{{ record.createTime }}　订单编号：{{ record.outTradeNo }}
-                  <span class="pull-right delete"><img :src="deleteImg" /></span
+                  <span class="pull-right delete"
+                    ><img v-lazy="deleteImg" /></span
                 ></span>
               </th>
             </tr>
@@ -42,7 +43,7 @@
               <td width="60%">
                 <div class="typographic">
                   <img
-                    :src="orderDetail.imgUrl"
+                    v-lazy="orderDetail.imgUrl"
                     style="width: 100px; height: 100px"
                   />
                   <a href="#" class="block-text">{{ orderDetail.skuName }}</a>
@@ -109,7 +110,7 @@
       <ul class="like-list">
         <li class="likeItem">
           <div class="p-img">
-            <img :src="itemlike01" />
+            <img v-lazy="itemlike01" />
           </div>
           <div class="attr">
             <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
@@ -122,7 +123,7 @@
         </li>
         <li class="likeItem">
           <div class="p-img">
-            <img :src="itemlike02" />
+            <img v-lazy="itemlike02" />
           </div>
           <div class="attr">Apple苹果iPhone 6s/6s Plus 16G 64G 128G</div>
           <div class="price">
@@ -133,7 +134,7 @@
         </li>
         <li class="likeItem">
           <div class="p-img">
-            <img :src="itemlike03" />
+            <img v-lazy="itemlike03" />
           </div>
           <div class="attr">DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</div>
           <div class="price">
@@ -144,7 +145,7 @@
         </li>
         <li class="likeItem">
           <div class="p-img">
-            <img :src="itemlike04" />
+            <img v-lazy="itemlike04" />
           </div>
           <div class="attr">DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</div>
           <div class="price">

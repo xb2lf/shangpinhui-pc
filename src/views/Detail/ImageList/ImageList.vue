@@ -7,7 +7,7 @@
         :key="slide.id"
       >
         <img
-          :src="slide.imgUrl"
+          v-lazy="slide.imgUrl"
           :class="{ active: currentIndex === index }"
           @click="handleChangeCurrentIndex(index)"
         />

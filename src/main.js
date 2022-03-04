@@ -23,6 +23,26 @@ import '@/mock/mockServer';
 import 'swiper/css/swiper.css';
 //统一接口api文件里面全部请求参数
 import * as API from '@/api';
+//引入vue-lozyload
+import VueLazyload from 'vue-lazyload';
+import loading from '@/assets/loading.gif';
+import errorImg from '@/assets/error.png';
+
+//引入自定义插件
+import myPlugins from '@/plugins/myPlugins';
+
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: errorImg,
+  loading: loading,
+});
+
+Vue.use(myPlugins, {
+  name: 'upper',
+});
+
+// 引入表单校验插件
+import '@/plugins/validate';
 
 Vue.config.productionTip = false
 

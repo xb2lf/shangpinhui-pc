@@ -5,21 +5,21 @@
       <ul class="recommend">
         <li class="clock">
           <div class="time">
-            <img :src="Clock" />
+            <img v-lazy="Clock" />
             <h3>今日推荐</h3>
           </div>
         </li>
         <li class="banner">
-          <img :src="Today01" />
+          <img v-lazy="Today01" />
         </li>
         <li class="banner">
-          <img :src="Today02" />
+          <img v-lazy="Today02" />
         </li>
         <li class="banner">
-          <img :src="Today03" />
+          <img v-lazy="Today03" />
         </li>
         <li class="banner">
-          <img :src="Today04" />
+          <img v-lazy="Today04" />
         </li>
       </ul>
     </div>
